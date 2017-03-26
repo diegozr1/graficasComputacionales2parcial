@@ -1,7 +1,7 @@
 // Proyecto segundo parcial
 
-// Toatzin Padilla
-// Diego Zamora Rodríguez
+// Toatzin Padilla 
+// Diego Zamora 
 
 #include <GL/glew.h>
 #include <GL/freeglut.h>
@@ -116,6 +116,23 @@ void render()
 	glutSwapBuffers();// Se intercambian buffers
 }
 
+// Función que se invoca cada vez que ocurre un evento de click del Mouse (botón derecho y al terminar)
+void mouse(int button, int state, int x, int y)
+{
+	if (button == GLUT_RIGHT_BUTTON && state == GLUT_UP)
+	{
+		cout << "GLUT_RIGHT & GLUT_UP, x= " << x << ", y= " << y << endl;
+	}
+}
+
+// Función que se invoca cada vez que ocurre un evento de movimiento y dragging del Mouse
+void motionMouse(int x, int y)
+{
+	//cout << "x= " << x << ", y= " << y << endl;
+}
+
+
+
 int main(GLint argc, GLchar **argv)
 {
 	// 1. Se crea una ventana y un contexto OpenGL usando GLUT
@@ -123,7 +140,12 @@ int main(GLint argc, GLchar **argv)
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH); // Se inicializan Buffers
 	glutInitWindowSize(width, height);  // Se define el teamaño de la ventana
 	glutCreateWindow("Proyecto de segundo parcial"); // Se crea la ventana
-	createMenu();
+	glDrawArrays(1, 1, 10);
+
+	glutMouseFunc(mouse);			// La función mouse se invocará cada vez que ocurra un click del mouse (botón derecho y terminar)
+	glutPassiveMotionFunc(motionMouse); // La función motionMouse se invocará cada vez que ocurra un movimiento del mouse
+	createMenu(); // se agrega el menu cada que ocurra un click izquierdo
+
 													   // 1.2 Se definen las funciones callback para el manejo de eventos
 	glutReshapeFunc(resize);// La funcin resize se invocar cada vez que se redimensione la ventana
 	glutDisplayFunc(render);// La funcin render se invocar cada vez que se tenga que dibujar
